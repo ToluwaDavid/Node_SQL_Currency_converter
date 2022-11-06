@@ -1,5 +1,6 @@
 const mysql = require('mysql');
-const conn = mysql.createConnection({
+require('dotenv').config();
+const conn = mysql.createPool({
     connectionLimit: 100,
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -7,6 +8,10 @@ const conn = mysql.createConnection({
     database: process.env.DB_NAME
 });
 
-conn.connect();
+// conn.connect();
+conn.getConnection((err, connection) => {
+    if (err) throw err;
+    console.log(`Connected as ID ` + connection.threadId);
+});
 
 module.exports = conn;
