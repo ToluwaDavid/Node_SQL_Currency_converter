@@ -3,13 +3,18 @@ const router = express.Router();
 const dbcontroller = require('../dbcontroller/query')
 
 
-// @desc Fetch all currency available
-//@route GET /api/currency
+// @desc Home page
+//@route GET /api/home
 //@access Public
 router.get('/api/home', (req, res) => {
     res.send('Welcome')
 })
 
+
+// @desc Fetch all currency available
+//@route GET /api/currency
+//@access Public
+router.get('/api/viewcurrencies', dbcontroller.viewcurrencies)
 
 
 
@@ -17,6 +22,11 @@ router.get('/api/home', (req, res) => {
 //@route POST /api/adduser
 //@access Public
 router.post('/api/adduser', dbcontroller.adduser)
+
+// @desc register users
+//@route POST /api/adduser
+//@access Public
+router.post('/api/addcurrency', dbcontroller.addcurrency)
 
 
 

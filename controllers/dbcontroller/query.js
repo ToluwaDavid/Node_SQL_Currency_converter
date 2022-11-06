@@ -18,12 +18,32 @@ exports.adduser = (req, res) => {
     })
 }
 
-//ADDS A CURRENCY AND ITS DETAILS TO THE DATABASE
-exports.adduser = (req, res) => {
-    const { currencyname, currencycode, symbol, rate } = req.body;
+//VIEW ALL USERS
+exports.viewusers = (req, res) => {
     conn.getConnection((err, connection) => {
         if (err) throw err;
-        connection.query('INSERT INTO currency SET currencyname= ?, currencycode = ?, symbol = ?, rate = ? ', [currencyname, currencycode, symbol, rate], (err, rows) => {
+        connection.query('SELECT * FROM users', (err, rows) => {
+            connection.release();
+            if (!err) {
+                res.json(rows)
+            }
+            else {
+                res.json(err)
+            }
+        })
+    })
+}
+
+
+
+//ADDS A CURRENCY AND ITS DETAILS TO THE DATABASE
+exports.addcurrency = (req, res) => {
+    const { currencyname, symbol, description } = req.body;
+    conn.getConnection((err, connection) => {
+        // connection.release()
+        if (err) throw err;
+        connection.query('INSERT INTO currency SET currencyname= ?, symbol = ?, description = ? ', [currencyname, symbol, description], (err, rows) => {
+            connection.release()
             if (!err) {
                 res.json(rows)
                 // return rows
@@ -34,12 +54,11 @@ exports.adduser = (req, res) => {
     })
 }
 
-
-//VIEW ALL USERS
-exports.viewusers = (req, res) => {
+//VIEW ALL CURRENCIES
+exports.viewcurrencies = (req, res) => {
     conn.getConnection((err, connection) => {
         if (err) throw err;
-        connection.query('SELECT * FROM users', (err, rows) => {
+        connection.query('SELECT * FROM currency', (err, rows) => {
             connection.release();
             if (!err) {
                 res.json(rows)
