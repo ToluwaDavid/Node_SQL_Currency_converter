@@ -54,6 +54,24 @@ exports.addcurrency = (req, res) => {
     })
 }
 
+//ADDS A CURRENCY PAIR AND ITS DETAILS TO THE DATABASE
+exports.addcurrencypair = (req, res) => {
+    const { currencyone, symbolone, descriptionone, currencytwo, symboltwo, descriptiontwo, exchangerate } = req.body;
+    conn.getConnection((err, connection) => {
+        // connection.release()
+        if (err) throw err;
+        connection.query('INSERT INTO currencypair SET currencyone= ?, symbolone= ?, descriptionone= ?, currencytwo= ?, symboltwo= ? , descriptiontwo= ?, exchangerate= ? ', [currencyone, symbolone, descriptionone, currencytwo, symboltwo, descriptiontwo, exchangerate], (err, rows) => {
+            connection.release()
+            if (!err) {
+                res.json(rows)
+                // return rows
+            } else {
+                return err
+            }
+        })
+    })
+}
+
 //VIEW ALL CURRENCIES
 exports.viewcurrencies = (req, res) => {
     conn.getConnection((err, connection) => {
@@ -69,3 +87,5 @@ exports.viewcurrencies = (req, res) => {
         })
     })
 }
+
+

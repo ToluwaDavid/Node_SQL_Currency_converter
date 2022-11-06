@@ -28,6 +28,11 @@ router.post('/api/adduser', dbcontroller.adduser)
 //@access Public
 router.post('/api/addcurrency', dbcontroller.addcurrency)
 
+// @desc register users
+//@route POST /api/addcurrencypair
+//@access Public
+router.post('/api/addcurrencypair', dbcontroller.addcurrencypair)
+
 
 
 // @desc Fetch all users available
