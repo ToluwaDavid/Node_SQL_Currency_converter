@@ -88,4 +88,27 @@ exports.viewcurrencies = (req, res) => {
     })
 }
 
+//CONVERT PAIR
+exports.convertpair = (req, res) => {
+    const { currencypair, amount } = req.body
+    conn.getConnection((err, connection) => {
+        if (err) throw err;
+        connection.query('SELECT exchangerate FROM currencypair WHERE currencypair= ?', [currencypair], (err, rows) => {
+            connection.release();
+            if (!err) {
+                data = rows[0]["exchangerate"]
+                exchangerate = parseInt(data)
+                newamount = parseInt(amount)
+
+                finalamount = exchangerate * newamount
+                res.json('The estimated amount is ' + finalamount)
+            }
+            else {
+                res.json(err)
+            }
+        })
+    })
+}
+
+
 

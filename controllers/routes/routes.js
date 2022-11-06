@@ -12,27 +12,27 @@ router.get('/api/home', (req, res) => {
 
 
 // @desc Fetch all currency available
-//@route GET /api/currency
+//@route GET /api/viewcurrencies
 //@access Public
 router.get('/api/viewcurrencies', dbcontroller.viewcurrencies)
 
 
 
-// @desc register users
+// @desc register users | registers a new user
 //@route POST /api/adduser
 //@access Public
 router.post('/api/adduser', dbcontroller.adduser)
 
-// @desc register users
-//@route POST /api/adduser
+// @desc register/ add a new currency
+//@route POST /api/addcurrency
 //@access Public
 router.post('/api/addcurrency', dbcontroller.addcurrency)
 
-// @desc register users
+
+// @desc add a currency pair
 //@route POST /api/addcurrencypair
 //@access Public
 router.post('/api/addcurrencypair', dbcontroller.addcurrencypair)
-
 
 
 // @desc Fetch all users available
@@ -40,18 +40,10 @@ router.post('/api/addcurrencypair', dbcontroller.addcurrencypair)
 //@access Public
 router.get('/api/viewusers', dbcontroller.viewusers)
 
-// // @desc register users
-// //@route POST /api/adduser
-// //@access Public
-// router.post('/api/adduser', (req, res) => {
-//     res.send('Add User')
-// })
 
 // @desc convert from one currency to another
 //@route GET /api/convert
 //@access Public
-router.post('/api/convert', (req, res) => {
-    res.send('Convert')
-})
+router.get('/api/convert', dbcontroller.convertpair)
 
 module.exports = router;
