@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router();
+const dbcontroller = require('../dbcontroller/query')
 
 
 // @desc Fetch all currency available
@@ -10,26 +11,26 @@ router.get('/api/home', (req, res) => {
 })
 
 
+
+
+// @desc register users
+//@route POST /api/adduser
+//@access Public
+router.post('/api/adduser', dbcontroller.adduser)
+
+
+
 // @desc Fetch all users available
-//@route GET /api/users
+//@route GET /api/viewusers
 //@access Public
-router.get('/api/users', (req, res) => {
-    res.send('All users')
-})
+router.get('/api/viewusers', dbcontroller.viewusers)
 
-// @desc register users
-//@route POST /api/adduser
-//@access Public
-router.post('/api/adduser', (req, res) => {
-    res.send('Add User')
-})
-
-// @desc register users
-//@route POST /api/adduser
-//@access Public
-router.post('/api/adduser', (req, res) => {
-    res.send('Add User')
-})
+// // @desc register users
+// //@route POST /api/adduser
+// //@access Public
+// router.post('/api/adduser', (req, res) => {
+//     res.send('Add User')
+// })
 
 // @desc convert from one currency to another
 //@route GET /api/convert
