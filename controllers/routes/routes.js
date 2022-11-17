@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const dbcontroller = require('../dbcontroller/query')
+const testController = require('../dbcontroller/testController')
 
 
 // @desc Home page
@@ -45,5 +46,8 @@ router.get('/api/viewusers', dbcontroller.viewusers)
 //@route GET /api/convert
 //@access Public
 router.get('/api/convert', dbcontroller.convertpair)
+
+
+router.post('/addTest', testController.addTest)
 
 module.exports = router;
